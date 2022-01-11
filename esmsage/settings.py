@@ -80,14 +80,24 @@ WSGI_APPLICATION = 'esmsage.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_NAME', 'newone'),
-        'USER': os.environ.get('DATABASE_USER', 'newuser'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'newpass'),
+        'NAME': os.environ.get('DATABASE_NAME', 'newdb'),
+        'USER': os.environ.get('DATABASE_USER', 'newmyuser'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'newmypass'),
         'HOST': os.environ.get('DATABASE_HOST', '127.0.0.1'),
         'PORT': os.environ.get('DATABASE_PORT', '5433'),
     },
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+        
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    ),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
